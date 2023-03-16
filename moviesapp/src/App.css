@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 2px dashed red;
+}
+
+body {
+  background-image: url("./cinema.jpg");
+  background-size: cover;
+  padding: 10px;
+}
+
+.movie-display {
+  max-width: fit-content;
+  margin-inline: auto;
+  background-color: rgb(207, 93, 48, 0.8);
+  border-radius: 20px;
+  color: white;
+  padding: 5px;
+}
+
+form {
+  max-width: 45vw;
+  margin: 0px auto 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+input {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#container {
+  max-width: 70vw;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+p {
+  max-width: 50%;
+}
