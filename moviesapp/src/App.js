@@ -1,25 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Form from './components/Form';
-import MovieDisplay from './components/MovieDisplay';
+import { getMovie } from "./services/omdbapi";
 
-import './App.css';
+import Form from "./components/Form";
+import MovieDisplay from "./components/MovieDisplay";
+import NavBar from "./components/NavBar";
+
+import "./App.css";
 
 function App() {
   // store the data about a movie
   const [movie, setMovie] = useState(null);
 
-  // fetch data from API
-  const getMovie = async (searchTerm) => {
-    const response = await fetch(`https://www.omdbapi.com/?apikey=b1f31e8b&t=${searchTerm}`);
-    const data = await response.json();
-    setMovie(data);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getMovie("Clueless");
+      setMovie(data);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
-      <Form movieSearch={getMovie} />
-      {movie && <MovieDisplay movie={movie}/>}
+      <NavBar />
+
+      <div className="content">
+        <Form movieSearch={getMovie} setMovie={setMovie} />
+        <MovieDisplay movie={movie} />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import { useState } from "react";
+// have to rename form since it's the same name as our function
+import { Form as BootstrapForm, Button, Container } from "react-bootstrap";
 
 function Form(props) {
-  const { movieSearch } = props;
+  const { movieSearch, setMovie } = props;
 
   // formData is an object
   const [formData, setFormData] = useState({ searchTerm: "" });
@@ -12,25 +14,29 @@ function Form(props) {
   };
 
   // handle the on submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    movieSearch(formData.searchTerm);
-  }
+    const data = await movieSearch(formData.searchTerm);
+    setMovie(data);
+  };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          value={formData.searchTerm} 
-          name="searchTerm" 
-          placeholder="Search movie title"
-          onChange={handleChange} 
-        />
+    <Container className="mt-3">
+      <BootstrapForm onSubmit={handleSubmit}>
+        <BootstrapForm.Group className="button">
+          <BootstrapForm.Control
+            className="input" 
+            type="text" 
+            value={formData.searchTerm} 
+            name="searchTerm" 
+            placeholder="Search movie title" 
+            onChange={handleChange} 
+          />
 
-        <input type="submit" />
-      </form>
-    </div>
+          <Button variant="info" type="submit">Search</Button>
+        </BootstrapForm.Group>
+      </BootstrapForm>
+    </Container>
   );
 }
 
